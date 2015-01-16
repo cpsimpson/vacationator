@@ -1,3 +1,5 @@
 from django.contrib import admin
+from tracker.models import Allotment
 
-# Register your models here.
+
+admin.site.register(Allotment)

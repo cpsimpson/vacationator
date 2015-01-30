@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a0b1@)o)u(2nh5j@9r78bgr8=pnx3wvx#ts8fpr^b3vcd#ue9+'
+SECRET_KEY = os.environ.get('VACATIONATOR_SECRET_KEY', 'a0b1@)o)u(2nh5j@9r78bgr8=pnx3wvx#ts8fpr^b3vcd#ue9+')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,3 +82,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = (
+    'django_auth_ldap3.backends.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_LDAP_URI = os.environ.get('VACATIONATOR_LDAP_URI', 'ldap://127.0.0.1')
+AUTH_LDAP_BASE_DN = os.environ.get('VACATIONATOR_LDAP_BASE_DN',
+                                   'dc=example,dc=com')
+
+AUTH_LDAP_BIND_TEMPLATE = os.environ.get('VACATIONATOR_LDAP_BIND_TEMPLATE',
+                                         '{username}@example.com')
+AUTH_LDAP_UID_ATTRIB = os.environ.get("VACATIONATOR_LDAP_UID_ATTRIB", 'uid')
+AUTH_LDAP_ADMIN_GROUP = os.environ.get("VACATIONATOR_LDAP_ADMIN_GROUP",
+                                       "CN=Admin,dc=example,dc=com")
+

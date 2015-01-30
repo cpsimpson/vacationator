@@ -1,0 +1,4 @@
+Django==1.7.3
+django-auth-ldap3==0.9.1
+ldap3==0.9.7.2
+pyasn1==0.1.7
